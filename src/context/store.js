@@ -1,6 +1,4 @@
-import React, {
-  createContext, useEffect, useMemo, useState,
-} from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { useFetch } from '../utils/UseQuerry'
 
 export const StoreContext = createContext()
@@ -12,9 +10,22 @@ const StoreContextProvider = ({ children }) => {
   const [services, setServices] = useState()
   const { data: serviceData, loading: serviceLoading, error: serviceError } = useFetch('services.json')
 
+  const [currService, setCurrService] = useState(0)
+  const handleService = (value) => {
+    setCurrService(value)
+  }
+
+  const { data: userPerService, loading: userPerServiceLoading, error: userPerServiceError } = useFetch(`users.json?service_id=${currService}`)
+
   useEffect(() => {
-    setUsers(userData)
-  }, [userData])
+    let tempUser
+    if (currService >= 1) {
+      tempUser = userPerService
+    } else {
+      tempUser = userData
+    }
+    setUsers(tempUser)
+  }, [userData, userPerService, currService])
 
   useEffect(() => {
     setServices(serviceData)
@@ -31,6 +42,9 @@ const StoreContextProvider = ({ children }) => {
       setServices,
       serviceLoading,
       serviceError,
+      currService,
+      setCurrService,
+      handleService,
     }}
     >
       {children}

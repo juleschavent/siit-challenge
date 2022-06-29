@@ -7,6 +7,7 @@ const makeClass = makeStyles(() => ({
   userContainer: {
     display: 'flex',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
     gap: '20px',
   },
 }))
