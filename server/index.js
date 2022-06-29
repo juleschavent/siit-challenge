@@ -8,6 +8,7 @@ const bundler = new Bundler("src/index.html", { logLevel: 2 });
 const PORT = 3001;
 
 app.get('/services.json', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*')
   res.json(services);
 });
 
@@ -20,7 +21,7 @@ app.get('/users.json', (req, res) => {
   if (req.query.service_id) {
     filteredUsers = filteredUsers.filter((u) => u.service_ids.includes(parseInt(req.query.service_id)));
   }
-
+  res.header('Access-Control-Allow-Origin', '*')
   res.json(filteredUsers);
 })
 
