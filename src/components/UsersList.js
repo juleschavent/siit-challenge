@@ -6,7 +6,7 @@ import { useFetch } from '../utils/UseQuerry'
 const makeClass = makeStyles(() => ({
   userContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     flexWrap: 'wrap',
     gap: '20px',
   },
