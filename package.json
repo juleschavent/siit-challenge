@@ -5,6 +5,7 @@
   "repository": "",
   "license": "MIT",
   "private": true,
+  "proxy": "https://cat-fact.herokuapp.com/",
   "scripts": {
     "server": "node server/index.js",
     "start": "parcel src/index.html"
@@ -17,7 +18,8 @@
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.6.3",
-    "@mui/styles": "^5.6.2"
+    "@mui/styles": "^5.6.2",
+    "axios": "^0.27.2"
   },
   "eslintConfig": {
     "extends": [

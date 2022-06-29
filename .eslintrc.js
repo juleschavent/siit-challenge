@@ -26,5 +26,6 @@ module.exports = {
     'react/destructuring-assignment': 1,
     'react/prop-types': 1,
     'import/prefer-default-export': 'off',
+    "react/function-component-definition": 'off',
   },
 }
