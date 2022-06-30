@@ -1,5 +1,6 @@
+/* eslint-disable no-nested-ternary */
 import { makeStyles } from '@mui/styles'
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useEffect } from 'react'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import SearchIcon from '@mui/icons-material/Search'
@@ -8,7 +9,7 @@ import { StoreContext } from '../context/store'
 import User from './User'
 import SearchInput from './SearchInput'
 
-const makeClass = makeStyles(() => ({
+const makeClass = makeStyles((theme) => ({
   section: {
     padding: '100px 0',
   },
@@ -43,6 +44,10 @@ const makeClass = makeStyles(() => ({
     opacity: 0,
     transform: 'translateX(500px)',
   },
+  noMatch: {
+    textDecoration: 'underline',
+    color: theme.palette.text.error,
+  },
 }))
 
 const UsersList = () => {
@@ -59,6 +64,7 @@ const UsersList = () => {
       inputRef.current.children[0].children[0].children[0].focus()
     }, 500)
   }
+
   return (
     <section className={classes.section}>
       <Container maxWidth="lg">
@@ -74,9 +80,15 @@ const UsersList = () => {
           </div>
         </div>
         <div className={classes.userContainer}>
-          {userLoading ? 'loading' : users && users.map((user) => (
-            <User user={user} key={user.id} />
-          ))}
+          {userLoading ? 'loading' : (
+            users && users.length >= 1 ? (
+              users.map((user) => (
+                <User user={user} key={user.id} />
+              ))
+            ) : (
+              <Typography className={classes.noMatch}>No user matches your search</Typography>
+            )
+          )}
         </div>
       </Container>
     </section>

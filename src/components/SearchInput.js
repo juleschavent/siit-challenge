@@ -1,5 +1,7 @@
 import { makeStyles } from '@mui/styles'
-import React, { useContext, useEffect, useRef } from 'react'
+import React, {
+  useContext, useEffect, useRef, useState,
+} from 'react'
 import Typography from '@mui/material/Typography'
 import InputAdornment from '@mui/material/InputAdornment'
 import CloseIcon from '@mui/icons-material/Close'
@@ -30,7 +32,10 @@ const SearchInput = () => {
     setIsSearch, users, setUsers, userData,
   } = useContext(StoreContext)
 
+  const [inputValue, setInputValue] = useState('')
+
   const handleSearch = (e) => {
+    setInputValue(e.target.value)
     if (e.target.value.length >= 2) {
       const tempUsers = []
       users.forEach((user) => {
@@ -44,6 +49,12 @@ const SearchInput = () => {
     }
   }
 
+  const handleClose = () => {
+    setInputValue('')
+    setUsers(userData)
+    setIsSearch(false)
+  }
+
   return (
     <div className={classes.container}>
       <Input
@@ -51,8 +62,9 @@ const SearchInput = () => {
         placeholder="Who are you looking for ?"
         sx={inputStyle}
         onChange={handleSearch}
+        value={inputValue}
         endAdornment={(
-          <InputAdornment position="start" onClick={() => setIsSearch(false)} style={{ cursor: 'pointer' }}>
+          <InputAdornment position="start" onClick={handleClose} style={{ cursor: 'pointer' }}>
             <CloseIcon fontSize="8px" />
           </InputAdornment>
         )}
