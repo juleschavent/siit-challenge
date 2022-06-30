@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography'
 import HardwareIcon from '@mui/icons-material/Hardware'
 import { StoreContext } from '../context/store'
 import Service from './Service'
+import { Shimmer } from '../utils/shimmer'
 
 const makeClass = makeStyles((theme) => ({
   section: {
@@ -41,7 +42,9 @@ const ServicesList = () => {
           <HardwareIcon color="primary" />
         </div>
         <div className={classes.serviceContainer}>
-          {serviceLoading ? 'loading' : services && services.map((service) => (
+          {serviceLoading ? (
+            <Shimmer />
+          ) : services && services.map((service) => (
             <Service service={service} key={service.id} />
           ))}
         </div>

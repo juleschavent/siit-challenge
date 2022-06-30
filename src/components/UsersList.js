@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import { makeStyles } from '@mui/styles'
-import React, { useContext, useRef, useEffect } from 'react'
+import React, { useContext, useRef } from 'react'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import SearchIcon from '@mui/icons-material/Search'
@@ -8,6 +8,7 @@ import clsx from 'clsx'
 import { StoreContext } from '../context/store'
 import User from './User'
 import SearchInput from './SearchInput'
+import { Shimmer } from '../utils/shimmer'
 
 const makeClass = makeStyles((theme) => ({
   section: {
@@ -80,7 +81,9 @@ const UsersList = () => {
           </div>
         </div>
         <div className={classes.userContainer}>
-          {userLoading ? 'loading' : (
+          {userLoading ? (
+            <Shimmer />
+          ) : (
             users && users.length >= 1 ? (
               users.map((user) => (
                 <User user={user} key={user.id} />
