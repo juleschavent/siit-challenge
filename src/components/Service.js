@@ -21,7 +21,6 @@ const makeClass = makeStyles((theme) => ({
     padding: 16,
     width: 'fit-content',
     boxShadow: '0 2px 2px rgba(0,0,0,0.2)',
-    cursor: 'pointer',
     [theme.breakpoints.down('sm')]: {
       flexBasis: '100%',
       maxWidth: 277,
@@ -31,11 +30,13 @@ const makeClass = makeStyles((theme) => ({
   logo: {
     height: 40,
     marginRight: 26,
+    cursor: 'pointer',
   },
   iconContainer: {
     display: 'flex',
   },
   infoIcon: {
+    cursor: 'pointer',
     marginRight: 8,
   },
   exitIcon: {
@@ -64,7 +65,7 @@ const Service = ({ service }) => {
     <div
       className={classes.container}
     >
-      <Tooltip title="Click to see who's using this service" placement="bottom">
+      <Tooltip title={`Click to see who's using ${service.name}`} placement="bottom">
         <img
           src={service.logo_url}
           alt={`logo ${service.name}`}

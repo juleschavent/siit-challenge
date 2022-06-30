@@ -19,6 +19,7 @@ const theme = createTheme({
     text: {
       primary: '#333',
       secondary: '#666',
+      link: '#5000e5',
       error: '#ef233c',
     },
   },

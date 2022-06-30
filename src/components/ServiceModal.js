@@ -18,6 +18,9 @@ const makeClass = makeStyles((theme) => ({
   logo: {
     height: 40,
   },
+  link: {
+    color: theme.palette.text.link,
+  },
 }))
 
 const ServiceModal = ({ open, handleClose, service }) => {
@@ -42,7 +45,7 @@ const ServiceModal = ({ open, handleClose, service }) => {
         </Typography>
         <Typography variant="body2">
           Website: {' '}
-          <a href={service.website_url} alt={`link to ${service.name} website`}>
+          <a href={service.website_url} alt={`link to ${service.name} website`} target="_blank" rel="noreferrer" className={classes.link}>
             {service.website_url}
           </a>
         </Typography>
