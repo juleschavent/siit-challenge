@@ -1,33 +1,85 @@
 import { makeStyles } from '@mui/styles'
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
+import Container from '@mui/material/Container'
+import Typography from '@mui/material/Typography'
+import SearchIcon from '@mui/icons-material/Search'
+import clsx from 'clsx'
 import { StoreContext } from '../context/store'
-import { useFetch } from '../utils/UseQuerry'
+import User from './User'
+import SearchInput from './SearchInput'
 
 const makeClass = makeStyles(() => ({
+  section: {
+    padding: '100px 0',
+  },
+  searchContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    overflow: 'hidden',
+    marginBottom: 24,
+    '& h2': {
+      marginRight: 16,
+    },
+  },
   userContainer: {
     display: 'flex',
     justifyContent: 'flex-start',
     flexWrap: 'wrap',
     gap: '20px',
   },
+  searchIcon: {
+    cursor: 'pointer',
+    display: 'block',
+    visibility: 'visible',
+  },
+  searchInput: {
+    visibility: 'visible',
+    transform: 'translateX(0)',
+    opacity: 1,
+    transition: 'all .5s ease',
+  },
+  hide: {
+    visibility: 'hidden',
+    opacity: 0,
+    transform: 'translateX(500px)',
+  },
 }))
 
 const UsersList = () => {
   const classes = makeClass()
-  const { users, userLoading } = useContext(StoreContext)
+  const {
+    users, userLoading, isSearch, setIsSearch,
+  } = useContext(StoreContext)
+
+  const inputRef = useRef()
+
+  const handleSearch = () => {
+    setIsSearch(true)
+    setTimeout(() => {
+      inputRef.current.children[0].children[0].children[0].focus()
+    }, 500)
+  }
   return (
-    <div>
-      <h2>users list</h2>
-      <div className={classes.userContainer}>
-        {userLoading ? 'loading' : users && users.map((user) => (
-          <div key={user.id}>
-            <img src={user.avatar_url} alt="" />
-            <p>{user.name}</p>
-            <p>{user.position}</p>
+    <section className={classes.section}>
+      <Container maxWidth="lg">
+        <div className={classes.searchContainer}>
+          <Typography variant="h5" component="h2" color="textPrimary" style={{ position: 'relative', zIndex: 5, backgroundColor: 'white' }}>Users list</Typography>
+          {!isSearch && (
+          <div className={clsx(classes.searchIcon)}>
+            <SearchIcon color="primary" onClick={handleSearch} />
           </div>
-        ))}
-      </div>
-    </div>
+          )}
+          <div className={clsx(classes.searchInput, !isSearch && classes.hide)} ref={inputRef}>
+            <SearchInput />
+          </div>
+        </div>
+        <div className={classes.userContainer}>
+          {userLoading ? 'loading' : users && users.map((user) => (
+            <User user={user} key={user.id} />
+          ))}
+        </div>
+      </Container>
+    </section>
   )
 }
 

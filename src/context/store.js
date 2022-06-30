@@ -31,6 +31,8 @@ const StoreContextProvider = ({ children }) => {
     setServices(serviceData)
   }, [serviceData])
 
+  const [isSearch, setIsSearch] = useState(false)
+
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
     <StoreContext.Provider value={{
@@ -46,6 +48,8 @@ const StoreContextProvider = ({ children }) => {
       currService,
       setCurrService,
       handleService,
+      isSearch,
+      setIsSearch,
     }}
     >
       {children}
