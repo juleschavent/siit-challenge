@@ -1,15 +1,18 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { StoreContext } from '../context/store'
-import { useFetch } from './UseQuerry'
 
 export const useUserPerService = (id) => {
   const { userData } = useContext(StoreContext)
-  let nbUser = 0
+  const [nbUser, setNbUser] = useState(0)
 
-  userData.forEach((user) => {
-    if (user.service_ids.includes(id)) {
-      nbUser += 1
-    }
-  })
+  useEffect(() => {
+    let tempUser = 0
+    userData.forEach((user) => {
+      if (user.service_ids.includes(id)) {
+        tempUser += 1
+      }
+    })
+    setNbUser(tempUser)
+  }, [userData])
   return nbUser
 }

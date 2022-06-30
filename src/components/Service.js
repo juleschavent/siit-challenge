@@ -46,7 +46,6 @@ const makeClass = makeStyles((theme) => ({
 
 const Service = ({ service }) => {
   const classes = makeClass()
-  const monthlyCost = usePrice(service)
   const { handleService } = useContext(StoreContext)
 
   const userList = document.getElementById('users')
