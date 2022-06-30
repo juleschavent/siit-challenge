@@ -67,9 +67,9 @@ const UsersList = () => {
 
   return (
     <section className={classes.section}>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" id="users">
         <div className={classes.searchContainer}>
-          <Typography variant="h5" component="h2" color="textPrimary" style={{ position: 'relative', zIndex: 5, backgroundColor: 'white' }}>Users list</Typography>
+          <Typography variant="h5" component="h2" color="textPrimary">Users</Typography>
           {!isSearch && (
           <div className={clsx(classes.searchIcon)}>
             <SearchIcon color="primary" onClick={handleSearch} />

@@ -7,9 +7,9 @@ export const usePrice = (service) => {
   const pricePerActualUser = nb_user_using_service - nb_users_included >= 0 ? nb_user_using_service - nb_users_included : 0
   const monthlyCost = flat_cost + cost_per_user * pricePerActualUser
   return (
-    <p>
+    <span>
       {monthlyCost}
-      $ / per month
-    </p>
+      $ per month
+    </span>
   )
 }
